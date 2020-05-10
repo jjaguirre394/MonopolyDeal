@@ -4,7 +4,27 @@
   "libraries": [
     {
       "library": "@microsoft/signalr@latest",
-      "destination": "lib/@microsoft/signalr/"
+      "destination": "lib/@microsoft/signalr/",
+      "files": [
+        "dist/browser/signalr.js",
+        "dist/browser/signalr.js.map",
+        "dist/browser/signalr.min.js",
+        "dist/browser/signalr.min.js.map",
+        "package.json",
+        "README.md"
+      ]
+    },
+    {
+      "library": "@microsoft/signalr@latest",
+      "destination": "lib/@microsoft/signalr/",
+      "files": [
+        "dist/browser/signalr.js",
+        "dist/browser/signalr.js.map",
+        "dist/browser/signalr.min.js",
+        "dist/browser/signalr.min.js.map",
+        "package.json",
+        "README.md"
+      ]
     }
   ]
 }
