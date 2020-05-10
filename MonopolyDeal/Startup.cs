@@ -28,6 +28,7 @@ namespace MonopolyDeal
             {
                 configuration.RootPath = "ClientApp/build";
             });
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +56,7 @@ namespace MonopolyDeal
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapHub<GameHub>("/gameHub");
             });
 
             app.UseSpa(spa =>
