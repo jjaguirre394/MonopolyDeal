@@ -13,7 +13,7 @@ namespace MonopolyDeal.Hubs
         {
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomName);
         }
-        public async Task SendMessage(string user, string message)
+        public async Task SendStatus(string user, string message)
         {
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
