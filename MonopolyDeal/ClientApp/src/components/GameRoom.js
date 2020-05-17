@@ -1,11 +1,26 @@
 ﻿import React from 'react';
+import { connect } from 'react-redux';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import * as signalR from '@microsoft/signalr';
 
-export const GameRoom = (props) => {
+const GameRoom = (props) => {
     return (
         <div>
-            This is a GameRoom!
+            Hello {props.user}, this is a GameRoom. Please share the following room name with your friends!<br/>
+    <b>{props.room}</b>
+        <div>
+            Once they have all Joined. Please click the Start button.
+            <Button>Start</Button>
+        </div>
         </div>
            );
 };
+
+const mapStateToProps = state => {
+    return {
+        user: state.user,
+        room: state.room,
+        connection: state.connection
+    };
+};
+
+export default connect(mapStateToProps)(GameRoom);

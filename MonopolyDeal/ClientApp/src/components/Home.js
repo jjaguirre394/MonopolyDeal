@@ -1,34 +1,49 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { connect } from 'react-redux';
+import { useHistory } from "react-router-dom";
 
 
-export const Home = (props) => {
-    const [usernameState, setUsernameState] = useState("");
-    const [roomNameState, setRoomNameState] = useState("");
-
+const Home = (props) => {
     const handleUsernameChange = (e) => {
-        setUsernameState(e.target.value);
+        props.setUser(e.target.value);
     };
 
     const handleRoomNameChange = (e) => {
-        setRoomNameState(e.target.value);
+        props.setRoom(e.target.value);
     };
 
-    const createRoom = async (e) => {
-        props.connection.invoke("CreateRoom", "testRoom").catch(function (err) {
+    const history = useHistory();
+
+    const routeChange = () =>{ 
+        let path = '/game-room'; 
+        history.push(path);
+    }
+
+    const onCreateRoom = async (e) => {
+        const newRoomName = uuidv4()
+        props.setRoom(newRoomName);
+        props.connection.invoke("CreateRoom", newRoomName).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        routeChange();
+    };
+
+    const onJoinRoom = (e) => {
+        props.connection.invoke("JoinRoom", props.room).catch(function (err) {
             return console.error(err.toString());
         });
 
         window.location.href = "/game-room";
     };
 
-    const joinRoom = async (e) => {
-        props.connection.invoke("JoinRoom", roomNameState).catch(function (err) {
-            return console.error(err.toString());
+    const uuidv4 = () => {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
         });
-
-        window.location.href = "/game-room";
-    };
+      }
 
     return (
         <div>
@@ -39,7 +54,7 @@ export const Home = (props) => {
                 </FormGroup>
                 <hr />
                 <FormGroup>
-                    <Button onClick={(e) => joinRoom(e)}>
+                    <Button onClick={(e) => onCreateRoom(e)}>
                             Create Private Room
                     </Button>
                 </FormGroup>
@@ -47,7 +62,7 @@ export const Home = (props) => {
                 <FormGroup controlId="roomName">
                     <Label>Room Name</Label>
                     <Input type="text" placeholder="Room Name" onChange={handleRoomNameChange}/>
-                    <Button onClick={(e) => joinRoom(e)}>
+                    <Button onClick={(e) => onJoinRoom(e)}>
                         Join Private Room
                     </Button>
                 </FormGroup>
@@ -56,3 +71,29 @@ export const Home = (props) => {
     );
 }
 
+const mapStateToProps = state => {
+    return {
+        connection: state.connection,
+        user: state.user,
+        room: state.room
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setUser: (userName) => dispatch({
+            type: "set_user",
+            payload: {
+                user: userName
+            }
+        }),
+        setRoom: (roomName) => dispatch({
+            type: "set_room",
+            payload: {
+                room: roomName
+            }
+        })
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
