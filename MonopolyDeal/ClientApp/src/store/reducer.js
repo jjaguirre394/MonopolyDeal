@@ -2,6 +2,7 @@
     connection: {},
     user: "",
     room: "",
+    isHost: false,
     users: []
 }
 
@@ -28,6 +29,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 connection: action.payload.connection
             }
+        case "set_host":
+        return{
+            ...state,
+            isHost: action.payload.isHost
+        }
         default:
             return state;
     }

@@ -30,6 +30,7 @@ const Home = (props) => {
     const onCreateRoom = async (e) => {
         const newRoomName = uuidv4()
         props.setRoom(newRoomName);
+        props.setHost(true);
         connection.invoke("CreateRoom", newRoomName, props.user).catch(function (err) {
             return console.error(err.toString());
         });
@@ -38,10 +39,10 @@ const Home = (props) => {
     };
 
     const onJoinRoom = (e) => {
+        props.setHost(false);
         connection.invoke("JoinRoom", props.room, props.user).catch(function (err) {
             return console.error(err.toString());
         });
-
         routeToGame();
     };
 
@@ -104,6 +105,12 @@ const mapDispatchToProps = dispatch => {
             type: "set_conn",
             payload: {
                 connection: connection
+            }
+        }),
+        setHost: (isHost) => dispatch({
+            type: "set_host",
+            payload: {
+                isHost: isHost
             }
         })
 
