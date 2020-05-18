@@ -1,13 +1,8 @@
-﻿import * as signalR from '@microsoft/signalr';
-
-const connection = new signalR.HubConnectionBuilder().withUrl("/gameHub").build();
-connection.start().catch(function (err) {
-    return console.error(err.toString());
-});
-const initialState = {
-    connection: connection,
+﻿const initialState = {
+    connection: {},
     user: "",
-    room: ""
+    room: "",
+    users: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -15,14 +10,24 @@ const reducer = (state = initialState, action) => {
         case "set_user":
             return{
                 ...state,
-                user: action.payload.user
+                user: action.payload.user,
             };
         case "set_room":
             return{
                 ...state,
                 room: action.payload.room
             };
-    
+        
+        case "add_user":
+            return{
+                ...state,
+                users: [...state.users, action.payload.user]
+            }
+        case "set_conn":
+            return{
+                ...state,
+                connection: action.payload.connection
+            }
         default:
             return state;
     }

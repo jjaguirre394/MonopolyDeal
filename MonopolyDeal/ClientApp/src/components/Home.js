@@ -2,9 +2,14 @@ import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { useHistory } from "react-router-dom";
+import * as signalR from '@microsoft/signalr';
 
 
 const Home = (props) => {
+    const connection = new signalR.HubConnectionBuilder().withUrl("/gameHub").build();
+    connection.start().catch(function (err) {
+        return console.error(err.toString());
+    });
     const handleUsernameChange = (e) => {
         props.setUser(e.target.value);
     };
@@ -15,53 +20,55 @@ const Home = (props) => {
 
     const history = useHistory();
 
-    const routeChange = () =>{ 
-        let path = '/game-room'; 
+    const routeToGame = () => {
+        //save connection
+        props.setConn(connection);
+        let path = '/game-room';
         history.push(path);
     }
 
     const onCreateRoom = async (e) => {
         const newRoomName = uuidv4()
         props.setRoom(newRoomName);
-        props.connection.invoke("CreateRoom", newRoomName).catch(function (err) {
+        connection.invoke("CreateRoom", newRoomName, props.user).catch(function (err) {
             return console.error(err.toString());
         });
 
-        routeChange();
+        routeToGame();
     };
 
     const onJoinRoom = (e) => {
-        props.connection.invoke("JoinRoom", props.room).catch(function (err) {
+        connection.invoke("JoinRoom", props.room, props.user).catch(function (err) {
             return console.error(err.toString());
         });
 
-        window.location.href = "/game-room";
+        routeToGame();
     };
 
     const uuidv4 = () => {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-          return v.toString(16);
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
         });
-      }
+    }
 
     return (
         <div>
             <Form>
                 <FormGroup controlId="name">
                     <Label>Name</Label>
-                    <Input type="text" placeholder="User Name" onChange={handleUsernameChange}/>
+                    <Input type="text" placeholder="User Name" onChange={handleUsernameChange} />
                 </FormGroup>
                 <hr />
                 <FormGroup>
                     <Button onClick={(e) => onCreateRoom(e)}>
-                            Create Private Room
+                        Create Private Room
                     </Button>
                 </FormGroup>
                 <hr />
                 <FormGroup controlId="roomName">
                     <Label>Room Name</Label>
-                    <Input type="text" placeholder="Room Name" onChange={handleRoomNameChange}/>
+                    <Input type="text" placeholder="Room Name" onChange={handleRoomNameChange} />
                     <Button onClick={(e) => onJoinRoom(e)}>
                         Join Private Room
                     </Button>
@@ -92,7 +99,15 @@ const mapDispatchToProps = dispatch => {
             payload: {
                 room: roomName
             }
+        }),
+        setConn: (connection) => dispatch({
+            type: "set_conn",
+            payload: {
+                connection: connection
+            }
         })
+
+
     };
 };
 
