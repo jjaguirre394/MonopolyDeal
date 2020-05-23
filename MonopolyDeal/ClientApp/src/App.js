@@ -5,8 +5,6 @@ import Home from './components/Home';
 import GameRoom from './components/GameRoom';
 import './custom.css'
 
-
-
 const App = () => {
     return (
             <Layout>

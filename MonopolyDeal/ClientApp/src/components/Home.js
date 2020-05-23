@@ -2,14 +2,9 @@ import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { useHistory } from "react-router-dom";
-import * as signalR from '@microsoft/signalr';
 
 
 const Home = (props) => {
-    const connection = new signalR.HubConnectionBuilder().withUrl("/gameHub").build();
-    connection.start().catch(function (err) {
-        return console.error(err.toString());
-    });
     const handleUsernameChange = (e) => {
         props.setUser(e.target.value);
     };
@@ -21,8 +16,6 @@ const Home = (props) => {
     const history = useHistory();
 
     const routeToGame = () => {
-        //save connection
-        props.setConn(connection);
         let path = '/game-room';
         history.push(path);
     }
@@ -31,7 +24,7 @@ const Home = (props) => {
         const newRoomName = uuidv4()
         props.setRoom(newRoomName);
         props.setHost(true);
-        connection.invoke("CreateRoom", newRoomName, props.user).catch(function (err) {
+        props.connection.invoke("CreateRoom", newRoomName, props.user).catch(function (err) {
             return console.error(err.toString());
         });
 
@@ -40,7 +33,7 @@ const Home = (props) => {
 
     const onJoinRoom = (e) => {
         props.setHost(false);
-        connection.invoke("JoinRoom", props.room, props.user).catch(function (err) {
+        props.connection.invoke("JoinRoom", props.room, props.user).catch(function (err) {
             return console.error(err.toString());
         });
         routeToGame();
