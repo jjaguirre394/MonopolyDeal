@@ -5,7 +5,7 @@ import WildCard from './WildCard/WildCard';
 import RentCard from './RentCard/RentCard';
 import MoneyCard from './MoneyCard/MoneyCard';
 
-export const produceDeck = () =>{
+export const produceDeck = () => {
     let cards = produceActionCards();
     cards = cards.concat(producePropertyCards());
     cards = cards.concat(produceWildCards());

@@ -1,7 +1,7 @@
 import { Card } from '../Card';
 import { Colors, Rent } from '../CardConstants';
 
-class PropertyCard extends Card{
+class PropertyCard extends Card {
     constructor(type, propertyName) {
         var value = 0;
         switch (type) {

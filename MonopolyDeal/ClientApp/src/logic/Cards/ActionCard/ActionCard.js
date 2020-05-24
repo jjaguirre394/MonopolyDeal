@@ -1,7 +1,7 @@
 import { Card } from '../Card';
 import { ActionTypes } from '../CardConstants';
 
-class ActionCard extends Card{
+class ActionCard extends Card {
     constructor(type) {
         var value = 0;
         switch (type) {

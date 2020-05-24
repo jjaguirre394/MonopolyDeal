@@ -27,12 +27,10 @@ const GameRoom = (props) => {
     </div>
 
     var message;
-    if(props.isHost)
-    {
+    if (props.isHost) {
         message = hostMessage;
     }
-    else
-    {
+    else {
         message = playerMessage;
     }
     return (

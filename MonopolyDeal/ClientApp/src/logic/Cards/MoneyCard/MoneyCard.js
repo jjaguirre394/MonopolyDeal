@@ -1,6 +1,6 @@
 import { Card } from '../Card';
 
-class MoneyCard extends Card{
+class MoneyCard extends Card {
     constructor(value) {
         super(value);
     }

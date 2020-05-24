@@ -31,8 +31,7 @@ start();
 
 
 const App = (props) => {
-    if(connection)
-    {
+    if (connection) {
         props.setConn(connection);
     }
 
@@ -40,17 +39,16 @@ const App = (props) => {
         console.log(`${user} joined. Adding to users collection.`)
         props.addUser(user)
     }
-    
-    if(!isAddUserHandlerSet)
-    {
+
+    if (!isAddUserHandlerSet) {
         isAddUserHandlerSet = true;
         connection.on("UserJoined", handleUserJoined);
     }
     return (
-            <Layout>
-                <Route exact path='/' component={Home} />
-                <Route path='/game-room' component={GameRoom} />
-            </Layout>
+        <Layout>
+            <Route exact path='/' component={Home} />
+            <Route path='/game-room' component={GameRoom} />
+        </Layout>
     );
 }
 

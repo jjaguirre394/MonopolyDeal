@@ -1,7 +1,7 @@
 import { Card } from '../Card';
-import { CombinationColors, CombinationTypes} from '../CardConstants';
+import { CombinationColors, CombinationTypes } from '../CardConstants';
 
-class RentCard extends Card{
+class RentCard extends Card {
     constructor(type, value) {
         var value = 0;
         switch (type) {

@@ -2,7 +2,7 @@ import User from './User';
 import { produceDeck } from './Cards/CardUtilities';
 
 class MonopolyManager {
-    constructor(){
+    constructor() {
         this.currentUsers = [];
         this.deck = [];
     }

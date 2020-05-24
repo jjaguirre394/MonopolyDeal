@@ -1,9 +1,9 @@
-class User{
-    constructor(name){
+class User {
+    constructor(name) {
         this.name = name;
         this.hand = {};
         this.bank = 0;
-        this.properties= {};
+        this.properties = {};
     };
 }
 

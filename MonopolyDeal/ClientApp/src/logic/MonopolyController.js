@@ -8,7 +8,6 @@ class MonopolyController {
     start(users) {
         this.monopolyManager.initializeGame(users);
     }
-
 }
 
 export default MonopolyController;

@@ -24,7 +24,7 @@ export const Colors = {
     yellow: "yellow"
 }
 
-export const PropertyNames = 
+export const PropertyNames =
 {
     brown: ["Baltic Avenue", "Mediteranean Avenue"],
     blue: ["Boardwalk", "Park Place"],
@@ -48,7 +48,7 @@ export const Rent = {
     black: [1, 2, 3, 4],
     red: [2, 3, 6],
     utilities: [1, 2],
-    yellow: [2, 4, 6] 
+    yellow: [2, 4, 6]
 }
 
 export const CombinationTypes = {
