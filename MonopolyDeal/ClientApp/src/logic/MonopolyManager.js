@@ -1,5 +1,5 @@
-import User from './User'
-import { produceActionCards } from './Cards'
+import User from './User';
+import { produceDeck } from './Cards/CardUtilities';
 
 class MonopolyManager {
     constructor(){
@@ -12,11 +12,7 @@ class MonopolyManager {
         this.currentUsers = users.map(x => new User(x));
 
         //Initialize Deck
-        this.deck = produceActionCards();
-    }
-
-    initializeDeck = () => {
-
+        this.deck = produceDeck();
     }
 }
 
