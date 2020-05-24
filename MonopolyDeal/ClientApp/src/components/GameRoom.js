@@ -1,9 +1,15 @@
-﻿import React from 'react';
+﻿import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import Monopoly from './Monopoly';
 
 const GameRoom = (props) => {
+    const [startState, setStartState] = useState(false);
+
+    const handleStartChanged = () => {
+        setStartState(true);
+    }
+
     var hostMessage = <div>
         Hello {props.user}, this is a GameRoom. Please share the following room name with your friends!<br />
         <b>{props.room}</b>
@@ -17,25 +23,20 @@ const GameRoom = (props) => {
                     </li>
                 ))}
             </ul>
-            <Button>Start</Button>
+            <Button onClick={handleStartChanged}>Start</Button>
         </div>
-        <Monopoly></Monopoly>
     </div>
 
     var playerMessage = <div>
         Waiting for Host to start game...
     </div>
 
-    var message;
-    if (props.isHost) {
-        message = hostMessage;
-    }
-    else {
-        message = playerMessage;
-    }
+    var message = (props.isHost ? hostMessage : playerMessage);
+    var displayElement = (startState ? <Monopoly/> : message)
+
     return (
         <div>
-            {message}
+           {displayElement}
         </div>
     );
 };
