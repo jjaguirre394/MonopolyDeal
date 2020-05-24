@@ -1,4 +1,6 @@
-﻿const initialState = {
+﻿import Action from './actions';
+
+const initialState = {
     connection: {},
     user: "",
     room: "",
@@ -8,32 +10,32 @@
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case "set_user":
+        case Action.setUser:
             console.log(`Setting user: ${action.payload.user}`)
             return {
                 ...state,
                 user: action.payload.user,
             };
-        case "set_room":
+        case Action.setRoom:
             console.log(`Setting room: ${action.payload.room}`)
             return {
                 ...state,
                 room: action.payload.room
             };
 
-        case "add_user":
+        case Action.addUser:
             console.log(`Adding user to users collection: ${action.payload.user}`)
             return {
                 ...state,
                 users: [...state.users, action.payload.user]
             }
-        case "set_conn":
+        case Action.setConn:
             console.log(`Setting connection: ${action.payload.connection}`)
             return {
                 ...state,
                 connection: action.payload.connection
             }
-        case "set_host":
+        case Action.setHost:
             console.log(`Setting host: ${action.payload.isHost}`)
             return {
                 ...state,

@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { useHistory } from "react-router-dom";
+import Actions from '../store/actions';
 
 
 const Home = (props) => {
@@ -83,25 +84,25 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         setUser: (userName) => dispatch({
-            type: "set_user",
+            type: Actions.setUser,
             payload: {
                 user: userName
             }
         }),
         setRoom: (roomName) => dispatch({
-            type: "set_room",
+            type: Actions.setRoom,
             payload: {
                 room: roomName
             }
         }),
         setConn: (connection) => dispatch({
-            type: "set_conn",
+            type: Actions.setConn,
             payload: {
                 connection: connection
             }
         }),
         setHost: (isHost) => dispatch({
-            type: "set_host",
+            type: Actions.setHost,
             payload: {
                 isHost: isHost
             }
