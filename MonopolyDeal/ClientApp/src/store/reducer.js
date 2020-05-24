@@ -1,27 +1,5 @@
-﻿import * as signalR from '@microsoft/signalr';
-
-const connection = new signalR.HubConnectionBuilder().withUrl("/gameHub").build();
-
-async function start() {
-    try {
-        await connection.start();
-        console.log("connected");
-    } catch (err) {
-        console.log(err);
-        setTimeout(() => start(), 5000);
-    }
-};
-
-connection.onclose(async () => {
-    await start();
-});
-
-// Start the connection.
-
-start();
-
-const initialState = {
-    connection: connection,
+﻿const initialState = {
+    connection: {},
     user: "",
     room: "",
     isHost: false,
@@ -31,27 +9,32 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case "set_user":
+            console.log(`Setting user: ${action.payload.user}`)
             return{
                 ...state,
                 user: action.payload.user,
             };
         case "set_room":
+            console.log(`Setting room: ${action.payload.room}`)
             return{
                 ...state,
                 room: action.payload.room
             };
         
         case "add_user":
+            console.log(`Adding user to users collection: ${action.payload.user}`)
             return{
                 ...state,
                 users: [...state.users, action.payload.user]
             }
         case "set_conn":
+            console.log(`Setting connection: ${action.payload.connection}`)
             return{
                 ...state,
                 connection: action.payload.connection
             }
         case "set_host":
+            console.log(`Setting host: ${action.payload.isHost}`)
         return{
             ...state,
             isHost: action.payload.isHost

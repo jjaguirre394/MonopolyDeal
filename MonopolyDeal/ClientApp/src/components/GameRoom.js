@@ -4,13 +4,6 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import Monopoly from './Monopoly';
 
 const GameRoom = (props) => {
-    const handleUserJoined = (user) => {
-        props.addUser(user);
-    }
-    if (props.connection) {
-        props.connection.on("UserJoined", handleUserJoined);
-    }
-
     var hostMessage = <div>
         Hello {props.user}, this is a GameRoom. Please share the following room name with your friends!<br />
         <b>{props.room}</b>
@@ -59,15 +52,15 @@ const mapStateToProps = state => {
     };
 };
 
-const dispatchToProps = dispatch => {
-    return {
-        addUser: (userName) => dispatch({
-            type: "add_user",
-            payload: {
-                user: userName
-            }
-        })
-    }
-}
+// const dispatchToProps = dispatch => {
+//     return {
+//         addUser: (userName) => dispatch({
+//             type: "add_user",
+//             payload: {
+//                 user: userName
+//             }
+//         })
+//     }
+// }
 
-export default connect(mapStateToProps, dispatchToProps)(GameRoom);
+export default connect(mapStateToProps)(GameRoom);
