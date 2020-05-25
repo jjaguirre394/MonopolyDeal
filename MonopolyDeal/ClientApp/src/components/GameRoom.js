@@ -5,9 +5,21 @@ import Monopoly from './Monopoly';
 
 const GameRoom = (props) => {
     const [startState, setStartState] = useState(false);
+    const [startHandlerState, setStartHandlerState] = useState(false);
 
     const handleStartChanged = () => {
         setStartState(true);
+        // Let others know the game is starting, if host
+        if(props.isHost)
+        {
+            props.connection.invoke("StartGame");
+        }
+    }
+
+    if(!startHandlerState)
+    {
+        setStartHandlerState(true);
+        props.connection.on("ReceiveStart", handleStartChanged)
     }
 
     var hostMessage = <div>
@@ -50,16 +62,5 @@ const mapStateToProps = state => {
         isHost: state.isHost
     };
 };
-
-// const dispatchToProps = dispatch => {
-//     return {
-//         addUser: (userName) => dispatch({
-//             type: "add_user",
-//             payload: {
-//                 user: userName
-//             }
-//         })
-//     }
-// }
 
 export default connect(mapStateToProps)(GameRoom);

@@ -34,14 +34,15 @@ namespace MonopolyDeal.Hubs
             //}
         }
         
-        public async Task SendStatus(string user, string message)
+        public async Task SendState(string user, string state)
         {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+            await Clients.Others.SendAsync("ReceiveState", user, state);
         }
 
         public async Task StartGame()
         {
             //Initialize the game state and send it to all clients
+            await Clients.Others.SendAsync("ReceiveStart");
         }
     }
 }

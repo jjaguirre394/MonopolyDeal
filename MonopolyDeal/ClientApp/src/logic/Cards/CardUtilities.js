@@ -144,3 +144,20 @@ const getActionCards = (type, amount) => {
 
     return cards;
 }
+
+export const plainObjectToCardObject = (plainObject) => {
+    switch (plainObject.cardType) {
+        case "ActionCard":
+            return new ActionCard(plainObject.type);
+        case "MoneyCard":
+            return new MoneyCard(plainObject.value);
+        case "PropertyCard":
+            return new PropertyCard(plainObject.type, plainObject.propertyName);
+        case "RentCard":
+            return new RentCard(plainObject.type);
+        case "WildCard":
+            return new WildCard(plainObject.type);
+        default:
+            break;
+    }
+}

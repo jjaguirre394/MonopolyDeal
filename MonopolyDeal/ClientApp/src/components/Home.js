@@ -25,6 +25,8 @@ const Home = (props) => {
         const newRoomName = uuidv4()
         props.setRoom(newRoomName);
         props.setHost(true);
+        // Add the host here since all other users will be added when they send the "Join" message to the server.
+        props.addUser(props.user);
         props.connection.invoke("CreateRoom", newRoomName, props.user).catch(function (err) {
             return console.error(err.toString());
         });
@@ -106,9 +108,13 @@ const mapDispatchToProps = dispatch => {
             payload: {
                 isHost: isHost
             }
+        }),
+        addUser: (user) => dispatch({
+            type: Actions.addUser,
+            payload: {
+                user: user
+            }
         })
-
-
     };
 };
 

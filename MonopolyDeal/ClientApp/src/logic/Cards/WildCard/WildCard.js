@@ -43,7 +43,7 @@ class WildCard extends Card {
             default:
                 break;
         }
-        super(value, type);
+        super(value, type, "WildCard");
         this.combos = combos;
     }
 }

@@ -2,7 +2,7 @@ import { Card } from '../Card';
 import { CombinationColors, CombinationTypes } from '../CardConstants';
 
 class RentCard extends Card {
-    constructor(type, value) {
+    constructor(type) {
         var value = 0;
         switch (type) {
             case CombinationTypes.blueGreen:
@@ -26,7 +26,7 @@ class RentCard extends Card {
             default:
                 break;
         }
-        super(value, type);
+        super(value, type, "RentCard");
         this.combos = CombinationColors[type];
     }
 }

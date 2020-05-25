@@ -27,7 +27,7 @@ const reducer = (state = initialState, action) => {
             console.log(`Adding user to users collection: ${action.payload.user}`)
             return {
                 ...state,
-                users: [...state.users, action.payload.user]
+                users: state.users.concat([action.payload.user])
             }
         case Action.setConn:
             console.log(`Setting connection: ${action.payload.connection}`)

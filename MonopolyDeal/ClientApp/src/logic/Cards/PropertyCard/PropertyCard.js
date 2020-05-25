@@ -2,7 +2,7 @@ import { Card } from '../Card';
 import { Colors, Rent } from '../CardConstants';
 
 class PropertyCard extends Card {
-    constructor(type, propertyName) {
+    constructor(type, propertyName = null) {
         var value = 0;
         switch (type) {
             case Colors.brown:
@@ -37,7 +37,7 @@ class PropertyCard extends Card {
             default:
                 break;
         }
-        super(value, type);
+        super(value, type, "PropertyCard");
         this.propertyName = propertyName;
         this.rent = Rent[type];
     }

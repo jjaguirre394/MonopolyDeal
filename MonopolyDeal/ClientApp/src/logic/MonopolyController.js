@@ -1,4 +1,4 @@
-import MonopolyManager from './MonopolyManager'
+import MonopolyManager from './MonopolyManager';
 
 class MonopolyController {
     constructor() {
@@ -6,7 +6,20 @@ class MonopolyController {
     }
 
     start(users) {
-        this.monopolyManager.initializeGame(users);
+        // Initialize Game
+        return this.monopolyManager.initializeGame(users);
+    }
+
+    updateState(newState) {
+        this.monopolyManager.updateState(newState);
+    }
+
+    getHand(user) {
+        return this.monopolyManager.getHand(user);
+    }
+
+    getState() {
+        return this.monopolyManager.getState();
     }
 }
 

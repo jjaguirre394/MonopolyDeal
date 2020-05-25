@@ -38,7 +38,7 @@ class ActionCard extends Card {
             default:
                 break;
         }
-        super(value, type);
+        super(value, type, "ActionCard");
     }
 }
 
