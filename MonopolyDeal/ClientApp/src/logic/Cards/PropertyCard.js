@@ -1,5 +1,6 @@
-import { Card } from '../Card';
-import { Colors, Rent } from '../CardConstants';
+import { Card } from './Card';
+import { Colors, Rent } from './CardConstants';
+import React from 'react';
 
 class PropertyCard extends Card {
     constructor(type, propertyName = null) {
@@ -41,6 +42,16 @@ class PropertyCard extends Card {
         this.propertyName = propertyName;
         this.rent = Rent[type];
     }
-}
+
+    getCardElements() {
+        var elements = super.getCardElements();
+        elements.push(<div>
+            <p>Propert Name: {this.propertyName}</p>
+            <p>Rent: {this.rent}</p>
+        </div>);
+
+        return elements;
+    };
+};
 
 export default PropertyCard;

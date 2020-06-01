@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import MonopolyController from '../logic/MonopolyController';
+import Hand from './Hand'
 
 const controller = new MonopolyController();
 
@@ -11,7 +12,7 @@ const Monopoly = (props) => {
     const [gameStarted, setGameStarted] = useState(false);
 
     const handleUpdateState = (user, newState) => {
-        console.log(`${user} sent ${newState}. Updating state to match this.`);
+        console.log(`${user} sent new state. Updating state to match this.`);
         let gameStateObject = JSON.parse(newState);
         controller.updateState(gameStateObject);
         setGameState(gameStateObject);
@@ -24,13 +25,12 @@ const Monopoly = (props) => {
     }
 
     if (!stateHandlerState) {
-        setStateHandlerState (true);
+        setStateHandlerState(true);
         console.log("Setting ReceiveState handler.")
         props.connection.on("ReceiveState", handleUpdateState)
     }
 
-    if (props.isHost && !gameStarted)
-    {
+    if (props.isHost && !gameStarted) {
         // Get initial state
         let gameState = controller.start(props.users);
         // Communicate it to all
@@ -40,8 +40,8 @@ const Monopoly = (props) => {
 
     return (
         <div>
-            I am {props.user}! 
-            Hand: {JSON.stringify(controller.getHand(props.user))}
+            I am {props.user}!
+            <Hand hand={controller.getHand(props.user)}></Hand>
         </div>);
 
 };

@@ -10,14 +10,12 @@ const GameRoom = (props) => {
     const handleStartChanged = () => {
         setStartState(true);
         // Let others know the game is starting, if host
-        if(props.isHost)
-        {
+        if (props.isHost) {
             props.connection.invoke("StartGame");
         }
     }
 
-    if(!startHandlerState)
-    {
+    if (!startHandlerState) {
         setStartHandlerState(true);
         props.connection.on("ReceiveStart", handleStartChanged)
     }
@@ -44,11 +42,11 @@ const GameRoom = (props) => {
     </div>
 
     var message = (props.isHost ? hostMessage : playerMessage);
-    var displayElement = (startState ? <Monopoly/> : message)
+    var displayElement = (startState ? <Monopoly /> : message)
 
     return (
         <div>
-           {displayElement}
+            {displayElement}
         </div>
     );
 };

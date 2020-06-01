@@ -69,3 +69,11 @@ export const CombinationColors = {
     utilitiesBlack: [Colors.utilities, Colors.green],
     yellowRed: [Colors.yellow, Colors.red]
 }
+
+export const CardTypes = {
+    ActionCard: "ActionCard",
+    MoneyCard: "MoneyCard",
+    PropertyCard: "PropertyCard",
+    RentCard: "RentCard",
+    WildCard: "WildCard"
+}

@@ -1,5 +1,6 @@
-import { Card } from '../Card';
-import { CombinationColors, CombinationTypes } from '../CardConstants';
+import { Card } from './Card';
+import { CombinationColors, CombinationTypes } from './CardConstants';
+import React from 'react';
 
 class RentCard extends Card {
     constructor(type) {
@@ -28,7 +29,16 @@ class RentCard extends Card {
         }
         super(value, type, "RentCard");
         this.combos = CombinationColors[type];
-    }
-}
+    };
+
+    getCardElements() {
+        var elements = super.getCardElements();
+        elements.push(<div>
+            <p>Combos: {this.combos}</p>
+        </div>);
+
+        return elements;
+    };
+};
 
 export default RentCard;

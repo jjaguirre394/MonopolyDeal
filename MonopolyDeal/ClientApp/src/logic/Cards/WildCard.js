@@ -1,11 +1,12 @@
-import { CombinationTypes } from "../CardConstants";
-import PropertyCard from "../PropertyCard/PropertyCard";
-import { Colors } from "../CardConstants";
-import { Card } from "../Card";
+import { CombinationTypes } from "./CardConstants";
+import PropertyCard from "./PropertyCard";
+import { Colors } from "./CardConstants";
+import { Card } from "./Card";
+import React from 'react';
 
 class WildCard extends Card {
     constructor(type) {
-        let combos = [];
+        let combos = null;
         var value = 0;
         var wildCardName = "wild_card";
         //Value based on combos
@@ -45,7 +46,18 @@ class WildCard extends Card {
         }
         super(value, type, "WildCard");
         this.combos = combos;
-    }
-}
+    };
+
+    getCardElements() {
+        var elements = super.getCardElements();
+        if (this.combos) {
+            elements.push(<div>
+                <p>Combos: {Object.keys(this.combos)}</p>
+            </div>);
+        }
+
+        return elements;
+    };
+};
 
 export default WildCard;

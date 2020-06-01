@@ -1,9 +1,9 @@
-import { ActionTypes, Colors, PropertyNames, CombinationTypes } from './CardConstants';
-import ActionCard from './ActionCard/ActionCard';
-import PropertyCard from './PropertyCard/PropertyCard';
-import WildCard from './WildCard/WildCard';
-import RentCard from './RentCard/RentCard';
-import MoneyCard from './MoneyCard/MoneyCard';
+import { ActionTypes, Colors, PropertyNames, CombinationTypes, CardTypes } from './CardConstants';
+import ActionCard from './ActionCard';
+import PropertyCard from './PropertyCard';
+import WildCard from './WildCard';
+import RentCard from './RentCard';
+import MoneyCard from './MoneyCard';
 
 export const produceDeck = () => {
     let cards = produceActionCards();

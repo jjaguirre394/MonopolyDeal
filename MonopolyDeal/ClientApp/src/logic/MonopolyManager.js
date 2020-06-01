@@ -37,9 +37,8 @@ class MonopolyManager {
     }
 
     getHand = (user) => {
-        if(this.gameState.currentUsers)
-        {
-            let foundUser = this.gameState.currentUsers.find((currentUser) =>{
+        if (this.gameState.currentUsers) {
+            let foundUser = this.gameState.currentUsers.find((currentUser) => {
                 return currentUser.name == user;
             });
 
@@ -52,9 +51,19 @@ class MonopolyManager {
 
     updateState = (newState) => {
         let newStateObject = new GameState(newState.currentUsers, newState.deck, newState.userTurn);
-        newStateObject.currentUsers = newStateObject.currentUsers.map(el => new User(el.name, el.hand.map(card => plainObjectToCardObject(card)), el.bank, el.property.map(card => plainObjectToCardObject(card))));
+        newStateObject.currentUsers = newStateObject.currentUsers.map(el =>
+            new User(
+                el.name,
+                el.hand.map(card => plainObjectToCardObject(card)),
+                el.bank,
+                el.property.map(card => plainObjectToCardObject(card))));
         newStateObject.deck = newStateObject.deck.map(card => plainObjectToCardObject(card));
-        newStateObject.userTurn = new User(newStateObject.userTurn.name, newStateObject.userTurn.hand.map(card => plainObjectToCardObject(card)), newStateObject.userTurn.bank, newStateObject.userTurn.property.map(card => plainObjectToCardObject(card)));
+        newStateObject.userTurn =
+            new User(
+                newStateObject.userTurn.name,
+                newStateObject.userTurn.hand.map(card => plainObjectToCardObject(card)),
+                newStateObject.userTurn.bank,
+                newStateObject.userTurn.property.map(card => plainObjectToCardObject(card)));
         this.gameState = newState;
     }
 }

@@ -52,7 +52,7 @@ const Home = (props) => {
     return (
         <div>
             <Form>
-                <FormGroup controlId="name">
+                <FormGroup controlid="name">
                     <Label>Name</Label>
                     <Input type="text" placeholder="User Name" onChange={handleUsernameChange} />
                 </FormGroup>
@@ -63,7 +63,7 @@ const Home = (props) => {
                     </Button>
                 </FormGroup>
                 <hr />
-                <FormGroup controlId="roomName">
+                <FormGroup controlid="roomName">
                     <Label>Room Name</Label>
                     <Input type="text" placeholder="Room Name" onChange={handleRoomNameChange} />
                     <Button onClick={(e) => onJoinRoom(e)}>

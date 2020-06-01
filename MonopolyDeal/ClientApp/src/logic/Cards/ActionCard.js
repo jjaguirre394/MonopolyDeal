@@ -1,5 +1,5 @@
-import { Card } from '../Card';
-import { ActionTypes } from '../CardConstants';
+import { Card } from './Card';
+import { ActionTypes } from './CardConstants';
 
 class ActionCard extends Card {
     constructor(type) {
@@ -39,7 +39,13 @@ class ActionCard extends Card {
                 break;
         }
         super(value, type, "ActionCard");
-    }
-}
+    };
+
+    getCardElements() {
+        var elements = super.getCardElements();
+
+        return elements;
+    };
+};
 
 export default ActionCard;
