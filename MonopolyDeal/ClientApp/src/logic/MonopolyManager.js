@@ -64,7 +64,7 @@ class MonopolyManager {
                 newStateObject.userTurn.hand.map(card => plainObjectToCardObject(card)),
                 newStateObject.userTurn.bank,
                 newStateObject.userTurn.property.map(card => plainObjectToCardObject(card)));
-        this.gameState = newState;
+        this.gameState = newStateObject;
     }
 }
 
