@@ -3,6 +3,7 @@ import PropertyCard from "./PropertyCard";
 import { Colors } from "./CardConstants";
 import { Card } from "./Card";
 import React from 'react';
+import { Button } from 'reactstrap';
 
 class WildCard extends Card {
     constructor(type) {
@@ -53,6 +54,7 @@ class WildCard extends Card {
         if (this.combos) {
             elements.push(<div>
                 <p>Combos: {Object.keys(this.combos)}</p>
+                <Button>Play WildCard</Button>
             </div>);
         }
 
