@@ -1,6 +1,7 @@
 import { Card } from './Card';
 import { CombinationColors, CombinationTypes } from './CardConstants';
 import React from 'react';
+import { Button } from 'reactstrap';
 
 class RentCard extends Card {
     constructor(type) {
@@ -33,8 +34,10 @@ class RentCard extends Card {
 
     getCardElements() {
         var elements = super.getCardElements();
-        elements.push(<div>
+        elements.push(
+        <div>
             <p>Combos: {this.combos}</p>
+            <Button>Collect Rent</Button>
         </div>);
 
         return elements;

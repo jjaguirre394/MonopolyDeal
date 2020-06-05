@@ -1,5 +1,7 @@
 import { Card } from './Card';
 import { ActionTypes } from './CardConstants';
+import React from 'react';
+import { Button } from 'reactstrap';
 
 class ActionCard extends Card {
     constructor(type) {
@@ -43,6 +45,9 @@ class ActionCard extends Card {
 
     getCardElements() {
         var elements = super.getCardElements();
+        var actionButton = <Button>Play Action</Button>;
+
+        elements.push(actionButton);
 
         return elements;
     };

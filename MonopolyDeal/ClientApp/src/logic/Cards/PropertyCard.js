@@ -1,6 +1,7 @@
 import { Card } from './Card';
 import { Colors, Rent } from './CardConstants';
 import React from 'react';
+import { Button } from 'reactstrap';
 
 class PropertyCard extends Card {
     constructor(type, propertyName = null) {
@@ -45,9 +46,11 @@ class PropertyCard extends Card {
 
     getCardElements() {
         var elements = super.getCardElements();
-        elements.push(<div>
+        elements.push(
+        <div>
             <p>Propert Name: {this.propertyName}</p>
             <p>Rent: {this.rent}</p>
+            <Button>Play Property</Button>
         </div>);
 
         return elements;
