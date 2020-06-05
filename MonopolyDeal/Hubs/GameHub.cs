@@ -27,6 +27,11 @@ namespace MonopolyDeal.Hubs
             await Clients.Others.SendAsync("ReceiveState", user, state);
         }
 
+        public async Task SendUserTurn(string userName)
+        {
+            await Clients.Others.SendAsync("ReceiveUserTurn", userName);
+        }
+
         public async Task StartGame()
         {
             await Clients.Others.SendAsync("ReceiveStart");

@@ -8,7 +8,7 @@ const controller = new MonopolyController();
 
 const Monopoly = (props) => {
     const [gameState, setGameState] = useState({});
-    const [stateHandlerState, setStateHandlerState] = useState(false);
+    const [handlerState, setHandlerState] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
 
     const handleUpdateState = (user, newState) => {
@@ -24,18 +24,29 @@ const Monopoly = (props) => {
         });
     }
 
-    if (!stateHandlerState) {
-        setStateHandlerState(true);
-        console.log("Setting ReceiveState handler.")
+    const sendUserTurn = (userName) => {
+        props.connection.invoke("SendUserTurn", userName).catch((err) => {
+            return console.error(err.toString());
+        });
+    }
+
+    if (!handlerState) {
+        setHandlerState(true);
+        console.log("Setting handlers.")
         props.connection.on("ReceiveState", handleUpdateState)
+
     }
 
     if (props.isHost && !gameStarted) {
         // Get initial state
         let gameState = controller.start(props.users);
+
         // Communicate it to all
         sendState(gameState);
         setGameStarted(true);
+
+        // Send the First the notification that it is his turn!
+        sendUserTurn(gameState.userTurn.name);
     }
 
     return (
