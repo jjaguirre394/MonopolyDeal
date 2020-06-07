@@ -5,8 +5,8 @@ class MoneyCard extends Card {
         super(value, "Money", "MoneyCard");
     };
 
-    getCardElements() {
-        var elements = super.getCardElements();
+    getCardElements(isDisabled = true) {
+        var elements = super.getCardElements(isDisabled);
 
         return elements;
     };

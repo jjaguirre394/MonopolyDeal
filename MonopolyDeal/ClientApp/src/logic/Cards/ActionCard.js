@@ -43,9 +43,9 @@ class ActionCard extends Card {
         super(value, type, "ActionCard");
     };
 
-    getCardElements() {
-        var elements = super.getCardElements();
-        var actionButton = <Button>Play Action</Button>;
+    getCardElements(isDisabled = true) {
+        var elements = super.getCardElements(isDisabled);
+        var actionButton = <Button disabled={isDisabled}>Play Action</Button>;
 
         elements.push(actionButton);
 

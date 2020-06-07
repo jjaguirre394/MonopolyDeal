@@ -7,7 +7,7 @@ const Hand = (props) => {
             <Row>
                 {props.hand.map((card, index) => (
                     <Col key={index}>
-                        {card.getCardElements()}
+                        {card.getCardElements(props.isDisabled)}
                     </Col>
                 ))}
             </Row>

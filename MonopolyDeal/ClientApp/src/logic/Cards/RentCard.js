@@ -32,12 +32,12 @@ class RentCard extends Card {
         this.combos = CombinationColors[type];
     };
 
-    getCardElements() {
-        var elements = super.getCardElements();
+    getCardElements(isDisabled = true) {
+        var elements = super.getCardElements(isDisabled);
         elements.push(
         <div>
             <p>Combos: {this.combos}</p>
-            <Button>Collect Rent</Button>
+            <Button disabled={isDisabled}>Collect Rent</Button>
         </div>);
 
         return elements;
