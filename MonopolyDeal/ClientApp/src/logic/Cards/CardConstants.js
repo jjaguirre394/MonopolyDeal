@@ -1,4 +1,4 @@
-export const ActionTypes = {
+export const ActionKinds = {
     dealBreaker: "deal_breaker",
     debtCollector: "debt_collector",
     doubleTheRent: "double_the_rent",
@@ -51,7 +51,7 @@ export const Rent = {
     yellow: [2, 4, 6]
 }
 
-export const CombinationTypes = {
+export const CombinationKinds = {
     blueGreen: "blueGreen",
     lightBlueBrown: "lightBlueBrown",
     orangePurple: "orangePurple",

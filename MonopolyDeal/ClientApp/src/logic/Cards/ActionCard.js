@@ -1,46 +1,46 @@
 import { Card } from './Card';
-import { ActionTypes } from './CardConstants';
+import { ActionKinds } from './CardConstants';
 import React from 'react';
 import { Button } from 'reactstrap';
 
 class ActionCard extends Card {
-    constructor(type) {
+    constructor(kind) {
         var value = 0;
-        switch (type) {
-            case ActionTypes.dealBreaker:
+        switch (kind) {
+            case ActionKinds.dealBreaker:
                 value = 5;
                 break;
-            case ActionTypes.debtCollector:
+            case ActionKinds.debtCollector:
                 value = 3;
                 break;
-            case ActionTypes.doubleTheRent:
+            case ActionKinds.doubleTheRent:
                 value = 1;
                 break;
-            case ActionTypes.forcedDeal:
+            case ActionKinds.forcedDeal:
                 value = 3;
                 break;
-            case ActionTypes.hotel:
+            case ActionKinds.hotel:
                 value = 3;
                 break;
-            case ActionTypes.house:
+            case ActionKinds.house:
                 value = 3;
                 break;
-            case ActionTypes.itsMyBirthday:
+            case ActionKinds.itsMyBirthday:
                 value = 2;
                 break;
-            case ActionTypes.justSayNo:
+            case ActionKinds.justSayNo:
                 value = 4;
                 break;
-            case ActionTypes.passGo:
+            case ActionKinds.passGo:
                 value = 1;
                 break;
-            case ActionTypes.slyDeal:
+            case ActionKinds.slyDeal:
                 value = 3;
                 break;
             default:
                 break;
         }
-        super(value, type, "ActionCard");
+        super(value, kind, "ActionCard");
     };
 
     getCardElements(isDisabled = true) {

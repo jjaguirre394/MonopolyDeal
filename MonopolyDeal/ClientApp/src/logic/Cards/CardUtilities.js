@@ -1,4 +1,4 @@
-import { ActionTypes, Colors, PropertyNames, CombinationTypes, CardTypes } from './CardConstants';
+import { ActionKinds, Colors, PropertyNames, CombinationKinds, CardTypes } from './CardConstants';
 import ActionCard from './ActionCard';
 import PropertyCard from './PropertyCard';
 import WildCard from './WildCard';
@@ -27,12 +27,12 @@ const shuffle = (cards) => {
 }
 
 const produceRentCards = () => {
-    let rentCards = getRentCards(CombinationTypes.all, 3);
-    rentCards = rentCards.concat(getRentCards(CombinationTypes.blueGreen, 2));
-    rentCards = rentCards.concat(getRentCards(CombinationTypes.lightBlueBrown, 2));
-    rentCards = rentCards.concat(getRentCards(CombinationTypes.orangePurple, 2));
-    rentCards = rentCards.concat(getRentCards(CombinationTypes.utilitiesBlack, 2));
-    rentCards = rentCards.concat(getRentCards(CombinationTypes.yellowRed, 2));
+    let rentCards = getRentCards(CombinationKinds.all, 3);
+    rentCards = rentCards.concat(getRentCards(CombinationKinds.blueGreen, 2));
+    rentCards = rentCards.concat(getRentCards(CombinationKinds.lightBlueBrown, 2));
+    rentCards = rentCards.concat(getRentCards(CombinationKinds.orangePurple, 2));
+    rentCards = rentCards.concat(getRentCards(CombinationKinds.utilitiesBlack, 2));
+    rentCards = rentCards.concat(getRentCards(CombinationKinds.yellowRed, 2));
 
     return rentCards;
 }
@@ -40,25 +40,25 @@ const produceRentCards = () => {
 const produceActionCards = () => {
     // 34 Action Cards
     // 2 Deal Breakers
-    let actionCards = getActionCards(ActionTypes.dealBreaker, 2);
+    let actionCards = getActionCards(ActionKinds.dealBreaker, 2);
     // 3 Just Say No
-    actionCards = actionCards.concat(getActionCards(ActionTypes.justSayNo, 3));
+    actionCards = actionCards.concat(getActionCards(ActionKinds.justSayNo, 3));
     // 3 Sly Deal
-    actionCards = actionCards.concat(getActionCards(ActionTypes.slyDeal, 3));
+    actionCards = actionCards.concat(getActionCards(ActionKinds.slyDeal, 3));
     // 4 Force Deal
-    actionCards = actionCards.concat(getActionCards(ActionTypes.forcedDeal, 3));
+    actionCards = actionCards.concat(getActionCards(ActionKinds.forcedDeal, 3));
     // 3 Debt Collector
-    actionCards = actionCards.concat(getActionCards(ActionTypes.debtCollector, 3));
+    actionCards = actionCards.concat(getActionCards(ActionKinds.debtCollector, 3));
     // 3 It's my Birthday
-    actionCards = actionCards.concat(getActionCards(ActionTypes.itsMyBirthday, 3));
+    actionCards = actionCards.concat(getActionCards(ActionKinds.itsMyBirthday, 3));
     // 10 Pass Go
-    actionCards = actionCards.concat(getActionCards(ActionTypes.passGo, 10));
+    actionCards = actionCards.concat(getActionCards(ActionKinds.passGo, 10));
     // 3 House
-    actionCards = actionCards.concat(getActionCards(ActionTypes.house, 3));
+    actionCards = actionCards.concat(getActionCards(ActionKinds.house, 3));
     // 3 Hotel
-    actionCards = actionCards.concat(getActionCards(ActionTypes.hotel, 2));
+    actionCards = actionCards.concat(getActionCards(ActionKinds.hotel, 2));
     // 2 Double Rent
-    actionCards = actionCards.concat(getActionCards(ActionTypes.doubleTheRent, 2));
+    actionCards = actionCards.concat(getActionCards(ActionKinds.doubleTheRent, 2));
 
     return actionCards;
 }
@@ -80,14 +80,14 @@ const producePropertyCards = () => {
 }
 
 const produceWildCards = () => {
-    let wildCards = getWildCards(CombinationTypes.blueGreen, 1);
-    wildCards = wildCards.concat(getWildCards(CombinationTypes.lightBlueBrown, 1));
-    wildCards = wildCards.concat(getWildCards(CombinationTypes.all, 2));
-    wildCards = wildCards.concat(getWildCards(CombinationTypes.orangePurple, 2));
-    wildCards = wildCards.concat(getWildCards(CombinationTypes.greenBlack, 1));
-    wildCards = wildCards.concat(getWildCards(CombinationTypes.lightBlueBlack, 1));
-    wildCards = wildCards.concat(getWildCards(CombinationTypes.utilitiesBlack, 1));
-    wildCards = wildCards.concat(getWildCards(CombinationTypes.yellowRed, 2));
+    let wildCards = getWildCards(CombinationKinds.blueGreen, 1);
+    wildCards = wildCards.concat(getWildCards(CombinationKinds.lightBlueBrown, 1));
+    wildCards = wildCards.concat(getWildCards(CombinationKinds.all, 2));
+    wildCards = wildCards.concat(getWildCards(CombinationKinds.orangePurple, 2));
+    wildCards = wildCards.concat(getWildCards(CombinationKinds.greenBlack, 1));
+    wildCards = wildCards.concat(getWildCards(CombinationKinds.lightBlueBlack, 1));
+    wildCards = wildCards.concat(getWildCards(CombinationKinds.utilitiesBlack, 1));
+    wildCards = wildCards.concat(getWildCards(CombinationKinds.yellowRed, 2));
 
     return wildCards;
 }
@@ -103,27 +103,27 @@ const produceMoneyCards = () => {
     return moneyCards;
 }
 
-const getPropertyCards = (type, propertyNames) => {
+const getPropertyCards = (kind, propertyNames) => {
     const cards = [];
     propertyNames.forEach(name => {
-        cards.push(new PropertyCard(type, name));
+        cards.push(new PropertyCard(kind, name));
     });
 
     return cards;
 }
 
-const getWildCards = (type, amount) => {
+const getWildCards = (kind, amount) => {
     const cards = [];
     for (let index = 0; index < amount; index++) {
-        cards.push(new WildCard(type))
+        cards.push(new WildCard(kind))
     }
     return cards;
 }
 
-const getRentCards = (type, amount) => {
+const getRentCards = (kind, amount) => {
     const cards = [];
     for (let index = 0; index < amount; index++) {
-        cards.push(new RentCard(type))
+        cards.push(new RentCard(kind))
     }
     return cards;
 }
@@ -136,10 +136,10 @@ const getMoneyCards = (value, amount) => {
     return cards;
 }
 
-const getActionCards = (type, amount) => {
+const getActionCards = (kind, amount) => {
     const cards = [];
     for (let index = 0; index < amount; index++) {
-        cards.push(new ActionCard(type))
+        cards.push(new ActionCard(kind))
     }
 
     return cards;
@@ -148,15 +148,15 @@ const getActionCards = (type, amount) => {
 export const plainObjectToCardObject = (plainObject) => {
     switch (plainObject.cardType) {
         case "ActionCard":
-            return new ActionCard(plainObject.type);
+            return new ActionCard(plainObject.kind);
         case "MoneyCard":
             return new MoneyCard(plainObject.value);
         case "PropertyCard":
-            return new PropertyCard(plainObject.type, plainObject.propertyName);
+            return new PropertyCard(plainObject.kind, plainObject.propertyName);
         case "RentCard":
-            return new RentCard(plainObject.type);
+            return new RentCard(plainObject.kind);
         case "WildCard":
-            return new WildCard(plainObject.type);
+            return new WildCard(plainObject.kind);
         default:
             break;
     }

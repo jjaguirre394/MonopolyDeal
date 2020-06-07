@@ -1,35 +1,35 @@
 import { Card } from './Card';
-import { CombinationColors, CombinationTypes } from './CardConstants';
+import { CombinationColors, CombinationKinds } from './CardConstants';
 import React from 'react';
 import { Button } from 'reactstrap';
 
 class RentCard extends Card {
-    constructor(type) {
+    constructor(kind) {
         var value = 0;
-        switch (type) {
-            case CombinationTypes.blueGreen:
+        switch (kind) {
+            case CombinationKinds.blueGreen:
                 value = 1;
                 break;
-            case CombinationTypes.lightBlueBrown:
+            case CombinationKinds.lightBlueBrown:
                 value = 1;
                 break;
-            case CombinationTypes.all:
+            case CombinationKinds.all:
                 value = 3;
                 break;
-            case CombinationTypes.orangePurple:
+            case CombinationKinds.orangePurple:
                 value = 1;
                 break;
-            case CombinationTypes.utilitiesBlack:
+            case CombinationKinds.utilitiesBlack:
                 value = 1;
                 break;
-            case CombinationTypes.yellowRed:
+            case CombinationKinds.yellowRed:
                 value = 1;
                 break;
             default:
                 break;
         }
-        super(value, type, "RentCard");
-        this.combos = CombinationColors[type];
+        super(value, kind, "RentCard");
+        this.combos = CombinationColors[kind];
     };
 
     getCardElements(isDisabled = true) {

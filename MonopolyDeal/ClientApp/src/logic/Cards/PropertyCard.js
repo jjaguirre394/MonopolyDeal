@@ -4,9 +4,9 @@ import React from 'react';
 import { Button } from 'reactstrap';
 
 class PropertyCard extends Card {
-    constructor(type, propertyName = null) {
+    constructor(kind, propertyName = null) {
         var value = 0;
-        switch (type) {
+        switch (kind) {
             case Colors.brown:
                 value = 1;
                 break;
@@ -39,9 +39,9 @@ class PropertyCard extends Card {
             default:
                 break;
         }
-        super(value, type, "PropertyCard");
+        super(value, kind, "PropertyCard");
         this.propertyName = propertyName;
-        this.rent = Rent[type];
+        this.rent = Rent[kind];
     }
 
     getCardElements(isDisabled = true) {
