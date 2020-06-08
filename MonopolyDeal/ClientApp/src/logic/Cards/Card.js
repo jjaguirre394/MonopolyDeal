@@ -8,8 +8,8 @@ export class Card {
         this.cardType = cardType
     };
 
-    getCardElements(isDisabled = true) {
-        var bankButton = <Button disabled={isDisabled}>Add To Bank</Button>;
+    getCardElements(isDisabled = true, onclickHandler) {
+        var bankButton = <Button disabled={isDisabled} onClick={() => onclickHandler("sell", this)}>Add To Bank</Button>;
         var elements = [
             <div>
                 <p>Kind: {this.kind}</p>

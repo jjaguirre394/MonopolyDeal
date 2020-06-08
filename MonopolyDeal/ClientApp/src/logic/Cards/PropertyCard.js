@@ -44,8 +44,8 @@ class PropertyCard extends Card {
         this.rent = Rent[kind];
     }
 
-    getCardElements(isDisabled = true) {
-        var elements = super.getCardElements(isDisabled);
+    getCardElements(isDisabled = true, onclickHandler) {
+        var elements = super.getCardElements(isDisabled, onclickHandler);
         elements.push(
         <div>
             <p>Propert Name: {this.propertyName}</p>

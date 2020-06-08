@@ -43,8 +43,8 @@ class ActionCard extends Card {
         super(value, kind, "ActionCard");
     };
 
-    getCardElements(isDisabled = true) {
-        var elements = super.getCardElements(isDisabled);
+    getCardElements(isDisabled = true, onclickHandler) {
+        var elements = super.getCardElements(isDisabled, onclickHandler);
         var actionButton = <Button disabled={isDisabled}>Play Action</Button>;
 
         elements.push(actionButton);

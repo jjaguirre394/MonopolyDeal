@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Alert } from 'reactstrap';
 import MonopolyController from '../logic/MonopolyController';
-import Hand from './Hand'
+import Hand from './Hand';
+import UserInfo from './UserInfo';
 
 const controller = new MonopolyController();
 
 const Monopoly = (props) => {
-    const [gameState, setGameState] = useState({});
+    const [gameState, setGameState] = useState(null);
     const [handlerState, setHandlerState] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
@@ -31,14 +32,29 @@ const Monopoly = (props) => {
         }
     }, [showAlert]);
 
+    const handleUserMove = (action, card) => {
+        if(turnCount > 0)
+        {
+            switch (action) {
+                case "sell":
+                    gameState.userTurn.sellToBank(card);
+                    break;
+                default:
+                    throw "Cannot find that user action!";
+            }
+            setTurnCount(turnCount-1);
+        }
+    };
+
     const handleUpdateState = (user, newState) => {
         console.log(`${user} sent new state. Updating state to match this.`);
-        let gameStateObject = JSON.parse(newState);
-        controller.updateState(gameStateObject);
-        setGameState(gameStateObject);
+        var gameStatePlainObject = JSON.parse(newState);
+        var newGameState = controller.updateState(gameStatePlainObject);
+        setGameState(newGameState);
     }
+
     const sendState = (state) => {
-        let stateString = JSON.stringify(state);
+        var stateString = JSON.stringify(state);
         props.connection.invoke("SendState", props.user, stateString).catch(function (err) {
             return console.error(err.toString());
         });
@@ -54,6 +70,7 @@ const Monopoly = (props) => {
         onShowAlert();
         if (userName == props.user) {
             setDisable(false);
+            setTurnCount(3);
         }
     }
 
@@ -74,19 +91,32 @@ const Monopoly = (props) => {
         sendState(initialState);
         setGameStarted(true);
 
-        // Send the First the notification that it is his turn!
+        // Send the First the notification that it is their turn!
         sendUserTurn(initialState.userTurn.name);
     }
+    
+    var alertComponent = null;
+    var turnMessageComponent = null;
+    var userInfoComponent = null;
+    var userHandComponent = null;
+    if(gameState)
+    {
+        var userTurnName = (gameState.isMyTurn(props.user)) ? "your" : gameState.userTurn.name + "'s";
+        alertComponent = <Alert color="info" isOpen={showAlert}>It is {userTurnName} turn!</Alert>
 
-    var userTurnName = (gameState.userTurn) ? gameState.userTurn.name : null;
+        var turnCountMessage = (gameState.isMyTurn(props.user)) ? `I have ${turnCount} moves left this round!` : null;
+        turnMessageComponent = <p>{turnCountMessage}</p>;
+
+        userInfoComponent = <UserInfo gameUser={gameState.getUser(props.user)}/>;
+        userHandComponent = <Hand hand={controller.getHand(props.user)} isDisabled={disable} onclickHandler={handleUserMove}></Hand>;
+    }
 
     return (
         <div>
-            <Alert color="info" isOpen={showAlert}>
-                It is {userTurnName}'s turn!
-                </Alert>
-            <p>I am {props.user}!</p>
-            <Hand hand={controller.getHand(props.user)} isDisabled={ disable }></Hand>
+            {alertComponent}
+            {userInfoComponent}
+            {turnMessageComponent}
+            {userHandComponent}
         </div>);
 
 };

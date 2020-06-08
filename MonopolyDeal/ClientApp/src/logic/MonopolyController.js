@@ -11,7 +11,7 @@ class MonopolyController {
     }
 
     updateState(newState) {
-        this.monopolyManager.updateState(newState);
+        return this.monopolyManager.updateState(newState);
     }
 
     getHand(user) {

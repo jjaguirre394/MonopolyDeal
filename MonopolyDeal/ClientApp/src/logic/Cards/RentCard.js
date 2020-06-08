@@ -32,8 +32,8 @@ class RentCard extends Card {
         this.combos = CombinationColors[kind];
     };
 
-    getCardElements(isDisabled = true) {
-        var elements = super.getCardElements(isDisabled);
+    getCardElements(isDisabled = true, onclickHandler) {
+        var elements = super.getCardElements(isDisabled, onclickHandler);
         elements.push(
         <div>
             <p>Combos: {this.combos}</p>

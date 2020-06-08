@@ -38,10 +38,7 @@ class MonopolyManager {
 
     getHand = (user) => {
         if (this.gameState.currentUsers) {
-            let foundUser = this.gameState.currentUsers.find((currentUser) => {
-                return currentUser.name == user;
-            });
-
+            let foundUser = this.gameState.getUser(user);
             let hand = (foundUser ? foundUser.hand : [])
 
             return hand;
@@ -65,6 +62,8 @@ class MonopolyManager {
                 newStateObject.userTurn.bank,
                 newStateObject.userTurn.property.map(card => plainObjectToCardObject(card)));
         this.gameState = newStateObject;
+
+        return newStateObject
     }
 }
 

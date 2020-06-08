@@ -49,8 +49,8 @@ class WildCard extends Card {
         this.combos = combos;
     };
 
-    getCardElements(isDisabled = true) {
-        var elements = super.getCardElements(isDisabled);
+    getCardElements(isDisabled = true, onclickHandler) {
+        var elements = super.getCardElements(isDisabled, onclickHandler);
         if (this.combos) {
             elements.push(<div>
                 <p>Combos: {Object.keys(this.combos)}</p>
